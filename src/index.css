@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body{
+    background: #ccc6c6;
+}
+.indicators{
+    margin-top:-30px !important;
+}
