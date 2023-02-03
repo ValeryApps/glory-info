@@ -31,7 +31,7 @@ export const CountriesDrawer = ({ visible, setVisible }) => {
             initial="closed"
             animate="open"
             exit="exit"
-            className="bg-white w-[300px] absolute mt-2 shadow-lg"
+            className="bg-white w-[300px] absolute pb-14 mt-2 mb-5 shadow-lg h-[100vh] overflow-scroll custom-scroll"
           >
             <div>
               <img src="/512.png" alt="" className="h-40 w-full" />

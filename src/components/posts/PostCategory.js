@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { dummyPosts } from "../../data/dummyData";
+import { fetch_posts_per_category } from "../../api/post/postApi";
+
 import { MainPost } from "./MainPost";
 import { RightPost } from "./RightPost";
 
 export const PostCategory = ({ category }) => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    const stories = dummyPosts.filter((x) => x.category === category);
-    setPosts(stories);
+    const getPosts = async () => {
+      const data = await fetch_posts_per_category(category);
+      setPosts(data);
+    };
+    getPosts();
   }, [setPosts, category]);
   return (
     <div className="flex justify-between flex-wrap mb-2">

@@ -44,7 +44,6 @@ export const SlideShow = ({ posts }) => {
       <div className="hidden relative md:block min-w-[50%] lg:flex lg:flex-wrap gap-2">
         {postsWithImages.slice(1, 5).map((post, index) => (
           <div
-            key={index}
             className={`${
               index + 1 === 1
                 ? "w-[55%]"
@@ -57,14 +56,16 @@ export const SlideShow = ({ posts }) => {
                 : "w-[58%]"
             } h-[10.3rem] relative `}
           >
-            <img
-              src={post?.images[0]}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute bg-[#00000080] bottom-3 min-h-[60px] w-[250px] rounded-tr-md rounded-br-md">
-              <h2 className="text-white line-clamp-2">{post?.title}</h2>
-            </div>
+            <Link to={`/post/${post?.slug}`} key={index}>
+              <img
+                src={post?.images[0]}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute bg-[#00000080] bottom-3 min-h-[60px] w-[250px] rounded-tr-md rounded-br-md">
+                <h2 className="text-white line-clamp-2">{post?.title}</h2>
+              </div>
+            </Link>
           </div>
         ))}
       </div>

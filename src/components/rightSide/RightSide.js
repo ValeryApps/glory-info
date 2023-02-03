@@ -1,6 +1,7 @@
 import React from "react";
+import { PostMedia } from "../posts/PostMedia";
 
-export const RightSide = () => {
+export const RightSide = ({ posts }) => {
   return (
     <div className="w-full bg-white rounded-md ">
       <div className="p-2">
@@ -16,10 +17,13 @@ export const RightSide = () => {
           Trending News
         </h1>
       </div>
-      <div className="h-96">
+      <div className="">
         <h1 className="text-2xl font-bold text-center bg-teal-800 text-white py-2">
           Recent News
         </h1>
+        {posts?.map((post) => (
+          <PostMedia post={post} key={post?.slug} />
+        ))}
       </div>
       <div className="h-96">
         <h1 className="text-2xl font-bold text-center bg-teal-800 text-white py-2">

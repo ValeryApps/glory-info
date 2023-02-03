@@ -14,7 +14,7 @@ export const CategoriesDrawer = ({ openCategories, setOpenCategories }) => {
 
   return (
     <main>
-      <div className="absolute top-4 px-2 right-0">
+      <div className="absolute top-4 px-2 right-0 ">
         <div onClick={setOpenCategories}>
           <FiMoreHorizontal className="text-white cursor-pointer" size={25} />
         </div>
@@ -26,7 +26,7 @@ export const CategoriesDrawer = ({ openCategories, setOpenCategories }) => {
             initial="closed"
             animate="open"
             exit="exit"
-            className="bg-white w-[300px] absolute mt-2 shadow-lg right-0"
+            className="bg-white w-[300px]  absolute mb-10 mt-2 shadow-lg right-0 h-[100vh] overflow-scroll custom-scroll pb-16"
           >
             <div>
               <img src="/512.png" alt="" className="h-40 w-full" />
