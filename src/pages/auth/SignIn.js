@@ -20,7 +20,6 @@ export const SignIn = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-    console.log(user);
   };
   const validate = Yup.object({
     email: Yup.string().email().required(),
@@ -57,7 +56,7 @@ export const SignIn = () => {
               <Input
                 type="text"
                 name="email"
-                placeHolder="Email Address"
+                placeholder="Email Address"
                 onChange={handleChange}
               />
             </div>
@@ -66,7 +65,7 @@ export const SignIn = () => {
               <Input
                 type={isPassword ? "password" : "text"}
                 name="password"
-                placeHolder="Password"
+                placeholder="Password"
                 onChange={handleChange}
               />
               {!isPassword ? (

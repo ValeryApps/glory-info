@@ -1,11 +1,12 @@
+import { getAuth } from "firebase/auth";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { categories } from "../../data/categories";
+// import { useAuthStatus } from "../../hooks/useAuthStatus";
 import { CategoriesDrawer } from "../drawer/CategoryDrawer";
 import { CountriesDrawer } from "../drawer/CountriesDrawer";
+import { UserMenu } from "../UserMenu";
 import { AppIntro } from "./AppIntro";
-// import { FiMenu } from "react-icons/fi";
-// import { AiOutlineClose } from "react-icons/ai";
 
 export const AppHeader = ({
   openCountries,
@@ -14,8 +15,15 @@ export const AppHeader = ({
   setOpenCategories,
 }) => {
   const [visible, setVisible] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
-
+  // const { loggedIn } = useAuthStatus();
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const signOut = async () => {
+    await auth.signOut();
+    navigate("/");
+  };
   return (
     <>
       <div className="hidden md:block">
@@ -64,17 +72,28 @@ export const AppHeader = ({
               More News...
             </div>
           </div>
-          <div className="gap-3 flex items-center">
-            <Link to="/login" className="text-white">
-              LOGIN
-            </Link>
-            <Link
-              to="/register"
-              className="bg-teal-500 px-3 py-1 rounded-md text-white"
+          {!auth.currentUser ? (
+            <div className="gap-3 flex items-center">
+              <Link to="/login" className="text-white">
+                LOGIN
+              </Link>
+              <Link
+                to="/register"
+                className="bg-teal-500 px-3 py-1 rounded-md text-white"
+              >
+                SIGN UP
+              </Link>
+            </div>
+          ) : (
+            <div
+              className="text-white cursor-pointer p-2"
+              onMouseEnter={() => setShowMenu(true)}
+              onMouseLeave={() => setShowMenu(false)}
             >
-              SIGN UP
-            </Link>
-          </div>
+              {auth.currentUser.displayName}
+              {showMenu && <UserMenu logout={signOut} />}
+            </div>
+          )}
         </nav>
         <CountriesDrawer
           visible={openCountries}

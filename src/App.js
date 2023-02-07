@@ -11,6 +11,7 @@ import { PostDetailsPage } from "./pages/posts/PostDetailsPage";
 import { PostsPerCategory } from "./pages/posts/PostsPerCategory";
 import { PostsPerCountry } from "./pages/posts/PostsPerCountry";
 import { AddPost } from "./pages/posts/AddPost";
+import { PrivateRoute } from "./private_route/PrivateRoute";
 
 function App() {
   const [openCountries, setOpenCountries] = useCycle(false, true);
@@ -45,7 +46,9 @@ function App() {
         <Route path="/post/:slug" element={<PostDetailsPage />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
-        <Route path="/create-post" element={<AddPost />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/create-post" element={<AddPost />} />
+        </Route>
       </Routes>
     </>
   );

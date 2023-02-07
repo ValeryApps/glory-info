@@ -44,6 +44,7 @@ export const SlideShow = ({ posts }) => {
       <div className="hidden relative md:block min-w-[50%] lg:flex lg:flex-wrap gap-2">
         {postsWithImages.slice(1, 5).map((post, index) => (
           <div
+            key={index}
             className={`${
               index + 1 === 1
                 ? "w-[55%]"
@@ -56,7 +57,7 @@ export const SlideShow = ({ posts }) => {
                 : "w-[58%]"
             } h-[10.3rem] relative `}
           >
-            <Link to={`/post/${post?.slug}`} key={index}>
+            <Link to={`/post/${post?.slug}`}>
               <img
                 src={post?.images[0]}
                 alt=""

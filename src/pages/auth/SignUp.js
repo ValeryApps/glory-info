@@ -6,7 +6,7 @@ import { FiLock } from "react-icons/fi";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { Input } from "../../components/inputs/Input";
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register_user } from "../../api/auth/auth";
 import { toast } from "react-toastify";
 
@@ -18,6 +18,7 @@ const initialValue = {
 export const SignUp = () => {
   const [user, setUser] = useState(initialValue);
   const [isPassword, setIsPassword] = useState(true);
+  const navigate = useNavigate();
   const { username, email, password } = user;
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +32,8 @@ export const SignUp = () => {
   const handleSubmit = async () => {
     try {
       await register_user(user);
-      toast.success("Account Created successfully");
+      toast.success("Account created successfully");
+      navigate("/");
     } catch (error) {
       if (error.message === "Firebase: Error (auth/email-already-in-use).")
         toast.error(
