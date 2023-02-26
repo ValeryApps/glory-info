@@ -1,7 +1,6 @@
 import { useCycle } from "framer-motion";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "./App.css";
 import { AppHeader } from "./components/appbar/AppHeader";
 import { SignIn } from "./pages/auth/SignIn";
 import { SignUp } from "./pages/auth/SignUp";
@@ -12,6 +11,8 @@ import { PostsPerCategory } from "./pages/posts/PostsPerCategory";
 import { PostsPerCountry } from "./pages/posts/PostsPerCountry";
 import { AddPost } from "./pages/posts/AddPost";
 import { PrivateRoute } from "./private_route/PrivateRoute";
+import { EditPost } from "./pages/posts/EditPost";
+import { Posts } from "./admin/Posts";
 
 function App() {
   const [openCountries, setOpenCountries] = useCycle(false, true);
@@ -48,6 +49,8 @@ function App() {
         <Route path="/register" element={<SignUp />} />
         <Route element={<PrivateRoute />}>
           <Route path="/create-post" element={<AddPost />} />
+          <Route path="/admin/posts" element={<Posts />} />
+          <Route path="/edit-post/:id" element={<EditPost />} />
         </Route>
       </Routes>
     </>

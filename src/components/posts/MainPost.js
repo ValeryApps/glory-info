@@ -5,6 +5,14 @@ export const MainPost = ({ post }) => {
   return (
     <div className="bg-white mb-2 p-4 h-[380px] lg:mb-0 md:h-96 overflow-hidden relative">
       <div className="overflow-hidden h-[351px] relative">
+        <div className="flex gap-4 absolute top-2 left-2">
+          <span className="bg-white text-teal-600 py-1 px-4 rounded-xl">
+            {post?.author}
+          </span>
+          <span className="bg-white text-teal-600 py-1 px-4 rounded-xl">
+            {post?.country}
+          </span>
+        </div>
         <img
           src={post?.images[0]}
           alt=""
@@ -16,6 +24,10 @@ export const MainPost = ({ post }) => {
               {post?.title}
             </h2>
           </Link>
+          <div className="absolute -bottom-2 bg-white px-4 py-2 rounded-full text-teal-700 font-bold flex gap-6">
+            <span> {post?.likesCount} Likes </span>
+            <span> {post?.commentsCount} comments </span>
+          </div>
         </div>
       </div>
     </div>

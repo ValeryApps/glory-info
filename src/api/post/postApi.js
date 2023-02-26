@@ -8,6 +8,12 @@ import {
   orderBy,
   where,
   limit,
+  updateDoc,
+  deleteDoc,
+  getDoc,
+  arrayUnion,
+  increment,
+  arrayRemove,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -73,6 +79,18 @@ export const fetch_post_per_slug = async (slug) => {
     throw error;
   }
 };
+export const fetch_post_by_id = async (postId) => {
+  try {
+    const postRef = doc(db, "posts", postId);
+    const postData = await getDoc(postRef);
+    if (postData.exists()) {
+      return postData.data();
+    }
+    return null;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const fetch_posts_per_country = async (country) => {
   try {
@@ -93,5 +111,40 @@ export const fetch_posts_per_country = async (country) => {
     return posts;
   } catch (error) {
     throw error;
+  }
+};
+
+export const update_post = async (id, data) => {
+  try {
+    const postRef = doc(db, "posts", id);
+    await updateDoc(postRef, data);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const delete_post = async (postId) => {
+  try {
+    const postRef = doc(db, "posts", postId);
+    await deleteDoc(postRef);
+  } catch (error) {}
+};
+
+export const like_post = async (postId, userId) => {
+  const postRef = doc(db, "posts", postId);
+  const post = await getDoc(postRef);
+  const userHasLiked = post.data()["likes"].indexOf(userId);
+  if (userHasLiked === -1) {
+    await updateDoc(postRef, {
+      likes: arrayUnion(userId),
+      likesCount: increment(1),
+    });
+    return true;
+  } else {
+    await updateDoc(postRef, {
+      likes: arrayRemove(userId),
+      likesCount: increment(-1),
+    });
+    return false;
   }
 };

@@ -58,7 +58,7 @@ export const Home = () => {
         </div>
         <SlideShow posts={posts} />
         <div className="flex justify-between">
-          <div className=" w-full lg:max-w-[75%] ">
+          <div className=" w-full lg:max-w-[75%]">
             <div>
               <CategoryPill category={"Politics"}>
                 <GiPublicSpeaker />

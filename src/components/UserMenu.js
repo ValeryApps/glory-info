@@ -2,6 +2,7 @@ import React from "react";
 import { useAuthStatus } from "../hooks/useAuthStatus";
 import { GrAdd, GrUserSettings } from "react-icons/gr";
 import { FiLogOut } from "react-icons/fi";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 export const UserMenu = ({ logout }) => {
@@ -15,17 +16,30 @@ export const UserMenu = ({ logout }) => {
           <span className="hover:text-teal-500 text-gray-700">SETTING</span>
         </li>
         {(loggedInAsAdmin || loggedInAsMod) && (
-          <li className="hover:bg-gray-200 rounded-lg font-semibold ">
-            <Link
-              className="flex items-center gap-3 cursor-pointer p-2"
-              to="/create-post"
-            >
-              <GrAdd />
-              <span className="hover:text-teal-500 text-gray-700">
-                ADD POST
-              </span>
-            </Link>
-          </li>
+          <>
+            <li className="hover:bg-gray-200 rounded-lg font-semibold ">
+              <Link
+                className="flex items-center gap-3 cursor-pointer p-2"
+                to="/create-post"
+              >
+                <GrAdd />
+                <span className="hover:text-teal-500 text-gray-700">
+                  ADD POST
+                </span>
+              </Link>
+            </li>
+            <li className="hover:bg-gray-200 rounded-lg font-semibold ">
+              <Link
+                className="flex items-center gap-3 cursor-pointer p-2"
+                to="/admin/posts"
+              >
+                <MdAdminPanelSettings />
+                <span className="hover:text-teal-500 text-gray-700">
+                  ADMIN POST
+                </span>
+              </Link>
+            </li>
+          </>
         )}
         <li
           className="hover:bg-gray-200 rounded-lg font-semibold flex items-center gap-3 cursor-pointer p-2"
